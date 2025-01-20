@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS event
     session_id uuid NOT NULL,
     date TIMESTAMP without time zone,
     type TEXT,
-    value decimal,
+    value numeric(10, 2),
     CONSTRAINT event_session_id FOREIGN KEY (session_id) REFERENCES session(id),
     CONSTRAINT event_id_pk PRIMARY KEY (id)
     );
@@ -23,11 +23,11 @@ CREATE TABLE IF NOT EXISTS event
 create INDEX session_session_id_index ON event USING btree (session_id);
 
 CREATE TABLE IF NOT EXISTS event_sum(
-                                        id serial,
+                                        id bigserial NOT NULL,
                                         session_id uuid NOT NULL,
                                         machine_id uuid NOT NULL,
                                         type TEXT,
-                                        total decimal,
+                                        total numeric(10, 2),
                                         CONSTRAINT event_sum_id_pk PRIMARY KEY (id),
     CONSTRAINT event_uniq_session_id_machine_id_and_type UNIQUE (session_id, machine_id, type)
     );
