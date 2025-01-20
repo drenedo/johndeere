@@ -55,12 +55,10 @@ public class EventSum {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("EventSum{");
-        sb.append("sessionId=").append(sessionId);
-        sb.append(", machineId=").append(machineId);
-        sb.append(", type='").append(type).append('\'');
-        sb.append(", total=").append(total);
-        sb.append('}');
-        return sb.toString();
+        return "EventSum{" + "sessionId=" + sessionId
+                + ", machineId=" + machineId
+                + ", type='" + type + '\''
+                + ", total=" + total
+                + '}';
     }
 }

@@ -25,7 +25,7 @@ public class FetchTotalsUseCase {
         if(machineId == null || sessionId == null) {
             throw new IllegalArgumentException("MachineId and sessionId are required");
         }
-        log.info("Fetching totals for machine {} and session {}", machineId.toString(), sessionId.toString());
+        log.info("Fetching totals for machine {} and session {}", machineId, sessionId);
         return toResponse(eventSumRepository.findByMachineIdAndSessionId(machineId, sessionId));
     }
 
