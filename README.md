@@ -22,6 +22,12 @@ Another time... due to time constraints, I chose to ignore the queue and made en
 - Java 23
 - Gradle or alternatively the gradle wrapper
 
+## Swagger
+
+The project has a swagger UI to test and document the endpoints.
+
+It is available at http://localhost:8080/swagger-ui.html
+
 ## How to run 
 
 ```shell

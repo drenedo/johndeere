@@ -1,4 +1,4 @@
 package me.renedo.jhondeere.application;
 
-public record Total (String total, Double value){
+public record Total (String type, Double value){
 }
