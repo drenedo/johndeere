@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: renedo-johndeere-deployment
+  namespace: renedo
+  labels:
+    app: renedo-johndeere-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: renedo-johndeere-app
+  template:
+    metadata:
+      labels:
+        app: renedo-johndeere-app
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      containers:
+        - name: renedo-johndeere
+          image: some-repository-renedo.com/renedo-johndeere:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 500M
+              cpu: 1
+            requests:
+              memory: 500M
+              cpu: 1
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 20
+            timeoutSeconds: 2
+            periodSeconds: 3
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 25
+            timeoutSeconds: 2
+            periodSeconds: 8
+            failureThreshold: 10
+      nodeSelector:
+        kubernetes.io/os: linux
+      terminationGracePeriodSeconds: 120
