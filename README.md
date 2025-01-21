@@ -28,10 +28,31 @@ The project has a swagger UI to test and document the endpoints.
 
 It is available at http://localhost:8080/swagger-ui.html
 
-## How to run 
+# k8s
+
+## Build image
+
+Very simple, use gradle to build the project and docker to build the image.
 
 ```shell
-./gradlew bootRun
+gradle build
+docker build -t renedo/johndeere .
 ```
 
-## k8s
+## Actuator endpoints
+
+Readiness and liveness probes are used to check the state of the application in Kubernetes.
+
+- /actuator/health
+- /actuator/health/readiness
+- /actuator/health/liveness
+
+## Configuration
+
+It's is under `k8s` folder. The configuration has tree files:
+
+[deployment.yml](k8s/deployment.yml) The descriptor of the pod, resources and so on. Needs some changes, for example the name of the imagen an a real repository url. This file will be used in the deployments modifying the image version.
+
+[scale.yml](k8s/scale.yml) The descriptor of the horizontal pod autoscaler, the k8s service needs HorizontalPodAutoscaler installed.
+
+[service.yml](k8s/service.yml) The descriptor of the service, a simple load balancer in the 8080 port. 
