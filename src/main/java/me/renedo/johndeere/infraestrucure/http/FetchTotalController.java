@@ -24,7 +24,7 @@ public class FetchTotalController {
         this.fetchTotalsUseCase = fetchTotalsUseCase;
     }
 
-    @GetMapping(value = "/total/machine/{machineId}/session/{sessionId}")
+    @GetMapping(value = "/total/machines/{machineId}/sessions/{sessionId}")
     public Set<TotalResponse> fetchTotal(@PathVariable("machineId") UUID machineId, @PathVariable("sessionId") UUID sessionId) {
         return toResponse(fetchTotalsUseCase.execute(machineId, sessionId));
     }

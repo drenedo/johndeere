@@ -1,6 +1,6 @@
 package me.renedo.johndeere.infraestrucure.http;
 
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +12,15 @@ import me.renedo.johndeere.application.CreateSessionUseCase;
 @RestController
 @RequestMapping("/api/v1")
 @Tag(name = "Session", description = "Save sessions")
-public class PutSessionController {
+public class PostSessionController {
 
     private final CreateSessionUseCase createSessionUseCase;
 
-    public PutSessionController(CreateSessionUseCase createSessionUseCase) {
+    public PostSessionController(CreateSessionUseCase createSessionUseCase) {
         this.createSessionUseCase = createSessionUseCase;
     }
 
-    @PutMapping(value = "/session")
+    @PostMapping(value = "/sessions")
     public void saveSession(@RequestBody SessionRequest sessionRequest) {
         createSessionUseCase.execute(toCommand(sessionRequest));
     }
