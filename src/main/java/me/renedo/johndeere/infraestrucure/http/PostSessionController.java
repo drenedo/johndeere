@@ -26,7 +26,7 @@ public class PostSessionController {
     }
 
     private CreateSessionCommand toCommand(SessionRequest sessionRequest) {
-        return new CreateSessionCommand(sessionRequest.machineId(), sessionRequest.sessionId(), sessionRequest.startAt());
+        return new CreateSessionCommand(sessionRequest.sessionId(), sessionRequest.machineId(), sessionRequest.startAt());
     }
 
 }

@@ -16,6 +16,10 @@ I chose the more productive way, at least for me, over performance due to time c
 
 Another time... due to time constraints, I chose to ignore the queue and made endpoints instead of queue clients. It is easiest and more productive, at least for me. Hexagonal architecture should help when implementing other ports in the future.
 
+### End to end test
+
+Some people could think that this end-to.end test style is not a real end to end tests, I'm in that group. But I think that it is a productive way, configure all the infrastructure to run a real end-to-end test involves a lot of work.  
+
 ## Requirements
 
 - Docker-API compatible container runtime to run testcontainers
