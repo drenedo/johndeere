@@ -8,15 +8,8 @@ import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.HostConfig;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
+import me.renedo.johndeere.JPARepositoryTest;
 import me.renedo.johndeere.domain.EventSum;
 import me.renedo.johndeere.domain.EventSumMother;
 import me.renedo.johndeere.infraestrucure.jpa.entity.EventEntity;
@@ -26,21 +19,7 @@ import me.renedo.johndeere.infraestrucure.jpa.entity.SessionEntityMother;
 import me.renedo.johndeere.infraestrucure.jpa.repository.EventEntityRepository;
 import me.renedo.johndeere.infraestrucure.jpa.repository.SessionEntityRepository;
 
-@Testcontainers
-@SpringBootTest
-class JPAEventSumRepositoryTest {
-
-    @Container
-    static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:17.2")
-            .withUsername("test")
-            .withPassword("test")
-            .withDatabaseName("main")
-            .withInitScript("sql/schema.sql")
-            .withNetworkAliases("pg")
-            .withExposedPorts(5432)
-            .withCreateContainerCmdModifier(cmd -> cmd.withHostConfig(
-                    new HostConfig().withPortBindings(new PortBinding(Ports.Binding.bindPort(15432), new ExposedPort(5432)))
-            ));
+class JPAEventSumRepositoryTest extends JPARepositoryTest {
 
     @Autowired
     private JPAEventSumRepository jpaEventSumRepository;
