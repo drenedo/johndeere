@@ -18,7 +18,11 @@ Another time... due to time constraints, I chose to ignore the queue and made en
 
 ### End to end test
 
-Some people could think that this end-to.end test style is not a real end to end tests, I'm in that group. But I think that it is a productive way, configure all the infrastructure to run a real end-to-end test involves a lot of work.  
+Some people could think that this end-to.end test style is not a real end to end tests, I'm in that group. But I think that it is a productive way, configure all the infrastructure to run a real end-to-end test involves a lot of work.
+
+### Rounding values in the aggregation
+
+Values store in the database are rounded to two decimal places. This assumption could lost some precision.
 
 ## Requirements
 
