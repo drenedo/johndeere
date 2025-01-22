@@ -1,9 +1,8 @@
 package me.renedo.johndeere.infraestrucure.jpa;
 
+import static me.renedo.johndeere.util.Rounder.round;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -46,11 +45,5 @@ class JPAEventRepositoryTest extends JPARepositoryTest {
         assertThat(all.getFirst().getValue().doubleValue()).isEqualTo(round(events.getFirst().getValue()));
         assertThat(all.get(1).getType()).isEqualTo(events.get(1).getType());
         assertThat(all.get(1).getValue().doubleValue()).isEqualTo(round(events.get(1).getValue()));
-    }
-
-    private static Double round(double value) {
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        return bd.doubleValue();
     }
 }

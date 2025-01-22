@@ -1,7 +1,7 @@
 package me.renedo.johndeere.infraestrucure.jpa;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import static me.renedo.johndeere.util.Rounder.round;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,14 +42,9 @@ class JPAEventSumRepositoryTest extends JPARepositoryTest {
         Set<EventSum> events = jpaEventSumRepository.findByMachineIdAndSessionId(session.getMachineId(), session.getId());
 
         // Then
-        Assertions.assertThat(events).usingRecursiveAssertion().isEqualTo(Set.of(EventSumMother.of(session.getId(), session.getMachineId(), event1.getType(),
-                round(event1.getValue().doubleValue() + event2.getValue().doubleValue() + event3.getValue().doubleValue())
-        )));
-    }
-
-    private static Double round(double value) {
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        return bd.doubleValue();
+        Assertions.assertThat(events).usingRecursiveAssertion()
+                .isEqualTo(Set.of(EventSumMother.of(session.getId(), session.getMachineId(), event1.getType(),
+                        round(event1.getValue().doubleValue() + event2.getValue().doubleValue() + event3.getValue().doubleValue())
+                )));
     }
 }
