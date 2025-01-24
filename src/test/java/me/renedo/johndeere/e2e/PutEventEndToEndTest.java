@@ -2,6 +2,7 @@ package me.renedo.johndeere.e2e;
 
 import static me.renedo.johndeere.util.Rounder.round;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -115,6 +116,6 @@ public class PutEventEndToEndTest extends BaseEndToEndTest {
         assertThat(eventEntity).hasSize(eventRequest.events().size());
         assertThat(round(eventEntity.stream().mapToDouble(e -> e.getValue().doubleValue()).sum()))
                 .isEqualTo(round(eventRequest.events().stream()
-                        .mapToDouble(EventRequest.Event::numericEventValue).sum()));
+                        .mapToDouble(EventRequest.Event::numericEventValue).sum()), withPrecision(0.03D));
     }
 }

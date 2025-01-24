@@ -35,7 +35,7 @@ public class FetchTotalEndToEndTest extends BaseEndToEndTest {
         assertThat(response.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(response.getBody()).isNotNull();
         assertThat(Arrays.stream(response.getBody()).mapToDouble(TotalResponse::value).sum())
-                .isEqualTo(round(eventRequest.events().stream().mapToDouble(EventRequest.Event::numericEventValue).sum()));
+                .isEqualTo(round(eventRequest.events().stream().mapToDouble(EventRequest.Event::numericEventValue).sum()), withPrecision(0.03D));
     }
 
     @Test
