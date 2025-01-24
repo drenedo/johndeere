@@ -9,10 +9,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 class CreateEventCommandMother {
 
-    public static CreateEventCommand any() {
-        return of(UUID.randomUUID(), List.of(anyEvent()));
-    }
-
     public static CreateEventCommand of(UUID id, List<CreateEventCommand.Event> events) {
         return new CreateEventCommand(id, events);
     }

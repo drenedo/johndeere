@@ -1,6 +1,7 @@
 package me.renedo.johndeere.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -27,7 +28,7 @@ public class PutSessionEndToEndTest extends BaseEndToEndTest {
     @Test
     public void verify_bad_request_when_creation_is_null() {
         //When
-        Assertions.assertThrows(HttpClientErrorException.BadRequest.class,
+        assertThrows(HttpClientErrorException.BadRequest.class,
                 () -> restTemplate.postForEntity(String.format("http://localhost:%d/api/v1/sessions", port), null, Void.class));
     }
 
@@ -37,7 +38,7 @@ public class PutSessionEndToEndTest extends BaseEndToEndTest {
         SessionRequest sessionRequest = SessionRequestMother.of(null, UUID.randomUUID(), LocalDateTime.now());
 
         //When
-        Assertions.assertThrows(HttpClientErrorException.BadRequest.class,
+        assertThrows(HttpClientErrorException.BadRequest.class,
                 () -> restTemplate.postForEntity(String.format("http://localhost:%d/api/v1/sessions", port), sessionRequest, Void.class));
     }
 
@@ -47,7 +48,7 @@ public class PutSessionEndToEndTest extends BaseEndToEndTest {
         SessionRequest sessionRequest = SessionRequestMother.of(UUID.randomUUID(), null, LocalDateTime.now());
 
         //When
-        Assertions.assertThrows(HttpClientErrorException.BadRequest.class,
+        assertThrows(HttpClientErrorException.BadRequest.class,
                 () -> restTemplate.postForEntity(String.format("http://localhost:%d/api/v1/sessions", port), sessionRequest, Void.class));
     }
 
@@ -57,7 +58,7 @@ public class PutSessionEndToEndTest extends BaseEndToEndTest {
         SessionRequest sessionRequest = SessionRequestMother.of(UUID.randomUUID(), UUID.randomUUID(), null);
 
         //When
-        Assertions.assertThrows(HttpClientErrorException.BadRequest.class,
+        assertThrows(HttpClientErrorException.BadRequest.class,
                 () -> restTemplate.postForEntity(String.format("http://localhost:%d/api/v1/sessions", port), sessionRequest, Void.class));
     }
 

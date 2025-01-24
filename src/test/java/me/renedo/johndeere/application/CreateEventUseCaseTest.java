@@ -2,6 +2,8 @@ package me.renedo.johndeere.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import me.renedo.johndeere.domain.EventRepository;
@@ -94,5 +97,18 @@ class CreateEventUseCaseTest {
 
         // Then
         assertEquals("Value is required", exception.getMessage());
+    }
+
+    @Test
+    public void should_create_events() {
+        // Given
+        CreateEventCommand event =
+                CreateEventCommandMother.of(UUID.randomUUID(), List.of(CreateEventCommandMother.anyEvent(), CreateEventCommandMother.anyEvent()));
+
+        // Whwn
+        createEventUseCase.execute(event);
+
+        // Then
+        Mockito.verify(eventRepository, times(1)).save(any());
     }
 }
