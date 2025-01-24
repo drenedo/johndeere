@@ -22,7 +22,7 @@ Some people could think that this end-to.end test style is not a real end to end
 
 ### Rounding values in the aggregation
 
-Values store in the database are rounded to two decimal places. This assumption could lost some precision.
+Values store in the database are rounded to two decimal places. This assumption could lost some precision in sum of values.
 
 ## Requirements
 

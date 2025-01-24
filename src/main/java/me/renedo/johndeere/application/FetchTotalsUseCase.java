@@ -29,7 +29,7 @@ public class FetchTotalsUseCase {
         return toResponse(eventSumRepository.findByMachineIdAndSessionId(machineId, sessionId));
     }
 
-    private Set<Total> toResponse(Set<EventSum> eventSums) {
+    private static Set<Total> toResponse(Set<EventSum> eventSums) {
         return eventSums.stream().map(eventSum -> new Total(eventSum.getType(), eventSum.getTotal())).collect(Collectors.toSet());
     }
 }

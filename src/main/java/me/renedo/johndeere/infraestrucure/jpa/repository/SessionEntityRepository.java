@@ -1,6 +1,7 @@
 package me.renedo.johndeere.infraestrucure.jpa.repository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,8 @@ public interface SessionEntityRepository extends JpaRepository<SessionEntity, UU
     @Modifying
     @Query("update session s set s.stop = ?1 where s.stop is null and s.machineId = ?2")
     void updateAllOpenedSessionsAndSetDate(LocalDateTime date, UUID machineId);
+
+
+    @Query("from session s where s.machineId = ?1 order by s.start desc limit 1")
+    Optional<SessionEntity> findLastByMachineId(UUID machineId);
 }
