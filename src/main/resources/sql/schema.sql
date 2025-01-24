@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS session
 
 create INDEX session_machine_id_index ON session USING btree (machine_id);
 
+create INDEX session_machine_id_start_index ON session USING btree (machine_id, start);
+
 CREATE TABLE IF NOT EXISTS event
 (
     id uuid NOT NULL,
