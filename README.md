@@ -29,6 +29,7 @@ Values store in the database are rounded to two decimal places. This assumption 
 - Docker-API compatible container runtime to run testcontainers
 - Java 23
 - Gradle or alternatively the gradle wrapper
+- Port 15432 free (mapped to 5432 in the PostgreSQL container)
 
 ## Swagger
 
