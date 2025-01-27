@@ -35,7 +35,7 @@ Values store in the database are rounded to two decimal places. This assumption 
 
 The project has a swagger UI to test and document the endpoints.
 
-It is available at http://localhost:8080/swagger-ui.html
+It is available at /swagger-ui.html
 
 # k8s
 
